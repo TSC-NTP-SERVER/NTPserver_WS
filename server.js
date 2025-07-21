@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const WebSocket = require("ws");
@@ -6,10 +8,9 @@ const { updateWatcher } = require("./service/wsService");
 const { setupWS, broadcast } = require("./controller/wsController");
 
 const app = express();
-const PORT = 4000;
-const MONGO_URI =
-  "mongodb+srv://admin:1234@testrecieve.ekkcpkz.mongodb.net/db?retryWrites=true&w=majority&appName=s";
-const DB_NAME = "db";
+const PORT = process.env.PORT;
+const MONGO_URI = process.env.MONGO_URI
+const DB_NAME = process.env.DB_NAME;
 
 async function start() {
   const mongoClient = new MongoClient(MONGO_URI);
